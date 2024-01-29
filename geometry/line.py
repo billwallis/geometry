@@ -1,6 +1,7 @@
 """
 Define a line between two points.
 """
+
 from __future__ import annotations
 
 from geometry.point import Number, Point

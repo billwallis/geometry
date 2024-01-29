@@ -1,6 +1,7 @@
 """
 Define a point in n-dimensional space.
 """
+
 from __future__ import annotations
 
 import math
