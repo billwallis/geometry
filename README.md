@@ -18,3 +18,12 @@
 # Geometry 🌐
 
 Simple geometry library for Python.
+
+## Quick start
+
+Install poetry and pre-commit:
+
+```bash
+poetry install --sync --with dev,test
+pre-commit install --install-hooks
+```
