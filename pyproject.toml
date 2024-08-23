@@ -34,7 +34,7 @@ black = "*"
 
 
 [tool.pytest.ini_options]
-addopts = "--cov=geometry --cov-report term-missing --cov-fail-under=60"
+addopts = "--cov=geometry --cov-report term-missing --cov-fail-under=100"
 testpaths = [
     "tests",
 ]
