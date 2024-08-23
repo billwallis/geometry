@@ -85,7 +85,11 @@ def test__point__addition_inplace(points: list[Number | Point], expected: Point)
         (3.0, Point(1.0, 2.0), Point(2.0, 1.0)),
     ],
 )
-def test__point__subtraction(point: Number | Point, other: Number | Point, expected: Point):
+def test__point__subtraction(
+    point: Number | Point,
+    other: Number | Point,
+    expected: Point,
+):
     """
     Test that points can be subtracted from each other and from numbers.
     """
