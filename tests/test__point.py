@@ -123,11 +123,19 @@ def test__point__subtraction_inplace(points: list[Number | Point], expected: Poi
     assert actual == expected
 
 
-def test__point__negation():
+@pytest.mark.parametrize(
+    "point, expected",
+    [
+        (Point(1, 2), Point(-1, -2)),
+        (Point(0, 0), Point(0, 0)),
+        (Point(-3, 4), Point(3, -4)),
+    ],
+)
+def test__point__negation(point: Point, expected: Point):
     """
     Test that points can be negated.
     """
-    assert -Point(1, 2) == Point(-1, -2)
+    assert -point == expected
 
 
 @pytest.mark.parametrize(
