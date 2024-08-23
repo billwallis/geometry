@@ -44,7 +44,10 @@ class Point(NamedTuple):
             return NotImplemented
 
     def __rsub__(self, other: Number | Point) -> Point:
-        return self.__sub__(other)
+        return -self.__sub__(other)
+
+    def __neg__(self) -> Point:
+        return Point(-self.x, -self.y)
 
     def __mul__(self, other: Number | Point) -> Point:
         if isinstance(other, Point):
@@ -62,7 +65,7 @@ class Point(NamedTuple):
 
     def rotate(self, angle: Number) -> Point:
         """
-        Rotate the point anticlockwise by an angle.
+        Rotate the point anticlockwise around (0, 0) by an angle.
 
         :param angle: The angle to rotate by, in radians.
 

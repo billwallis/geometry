@@ -21,7 +21,7 @@ from geometry.point import Number, Point
 )
 def test__line__initialisation__numbers(line: Line, start: Number, end: Number):
     """
-    Test the ``Line.__init__()`` method with numbers.
+    Test that a line can be initialised with numbers.
     """
     assert line.start == Point(start, start)
     assert line.end == Point(end, end)
@@ -29,7 +29,7 @@ def test__line__initialisation__numbers(line: Line, start: Number, end: Number):
 
 def test__line__initialisation__points():
     """
-    Test the ``Line.__init__()`` method with points.
+    Test that a line can be initialised with points.
     """
     line = Line(Point(1, 2), Point(3, 4))
 
@@ -39,7 +39,7 @@ def test__line__initialisation__points():
 
 def test__line__initialisation__mixed():
     """
-    Test the ``Line.__init__()`` method with mixed types.
+    Test that a line can be initialised with mixed types.
     """
     line = Line(1, Point(3, 4))
 
@@ -47,28 +47,35 @@ def test__line__initialisation__mixed():
     assert line.end == Point(3, 4)
 
 
-def test__line__string():
+def test__line__string_representation():
     """
-    Test the ``Line.__str__()`` method.
+    Test the string and representation of a line.
     """
     line = Line(1, Point(3, 4))
 
     assert str(line) == "Line(Point(x=1, y=1), Point(x=3, y=4))"
-
-
-def test__line__representation():
-    """
-    Test the ``Line.__repr__()`` method.
-    """
-    line = Line(1, Point(3, 4))
-
     assert repr(line) == "Line(Point(x=1, y=1), Point(x=3, y=4))"
     assert eval(repr(line)) == line
 
 
+@pytest.mark.parametrize(
+    "line, other, expected",
+    [
+        (Line(1, 2), Line(1, 2), True),
+        (Line(1, 2), Line(1.0, 2.0), True),
+        (Line(1, 2), Line(1, 3), False),
+    ],
+)
+def test__line__equal(line: Line, other: Line, expected: bool):
+    """
+    Test that lines can be compared for equality.
+    """
+    assert (line == other) is expected
+
+
 def test__line__equal__not_implemented():
     """
-    Test that ``Line.__eq__()`` is ``False``.
+    Test that lines are not equal to non-numerics.
     """
     assert (Line(1, 2) == "3") is False
 
@@ -82,10 +89,10 @@ def test__line__equal__not_implemented():
 )
 def test__line__addition(line: Line, other: Number | Point, expected: Line):
     """
-    Test the ``Line.__add__()`` and ``Line.__radd__()`` method.
+    Test that lines can be added to points and numbers.
     """
     assert (line + other) == expected
-    assert line.__radd__(other) == expected
+    assert (other + line) == expected
 
 
 @pytest.mark.parametrize(
@@ -97,7 +104,7 @@ def test__line__addition(line: Line, other: Number | Point, expected: Line):
 )
 def test__line__addition__not_implemented(line: Line, other: str | Line):
     """
-    Test that ``Line.__add__()`` fails.
+    Test that lines cannot be added to non-numerics.
     """
     with pytest.raises(TypeError):
         line + other
@@ -112,13 +119,38 @@ def test__line__addition__not_implemented(line: Line, other: str | Line):
 )
 def test__line__addition_inplace(points: list[Number | Point], expected: Line):
     """
-    Test the ``Line.__iadd__()`` method.
+    Test that lines can be added together and to points/numbers in place.
     """
     actual = Line(0, 0)
     for point in points:
         actual += point
 
     assert actual == expected
+
+
+@pytest.mark.parametrize(
+    "line, other, expected",
+    [
+        (Line(4, 5), 3, Line(1, 2)),
+        (Line(5, 6), Point(3, 4), Line(Point(2, 1), Point(3, 2))),
+    ],
+)
+def test__line__subtraction(line: Line, other: Number | Point, expected: Line):
+    """
+    Test that points and numbers can be subtracted from lines.
+    """
+    assert (line - other) == expected
+
+
+def test__line__subtraction__not_implemented():
+    """
+    Test that lines and non-numerics cannot be subtracted from lines.
+    """
+    with pytest.raises(TypeError):
+        Line(1, 2) - Line(1, 2)
+
+    with pytest.raises(TypeError):
+        Line(1, 2) - "3"
 
 
 @pytest.mark.parametrize(
@@ -133,14 +165,14 @@ def test__line__addition_inplace(points: list[Number | Point], expected: Line):
 )
 def test__line__rotate(line: Line, angle: Number, expected: Line):
     """
-    Test the ``Line.rotate()`` method.
+    Test that lines can be rotated.
     """
     assert line.rotate(angle) == expected
 
 
 def test__line__as_vector():
     """
-    Test the ``Line.rotate()`` method.
+    Test that a line can be represented as a vector.
     """
     line = Line(1, 2)
     assert line.as_vector() == Point(1, 1)
