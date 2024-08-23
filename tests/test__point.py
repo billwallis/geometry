@@ -19,17 +19,18 @@ from geometry.point import Number, Point
         (Point(1, 2), Point(1, 3), False),
     ],
 )
-def test__point__equal(point: Point, other: Number | Point, expected: Point):
+def test__point__equal(point: Point, other: Point, expected: Point):
     """
-    Test the ``Point.__eq__()`` method.
+    Test that points can be compared for equality.
     """
     assert (point == other) is expected
 
 
-def test__point__equal__not_implemented():
+def test__point__not_equal():
     """
-    Test that ``Point.__eq__()`` is ``False``.
+    Test that points are not equal to other types.
     """
+    assert (Point(1, 2) == 3) is False
     assert (Point(1, 2) == "3") is False
 
 
@@ -43,15 +44,15 @@ def test__point__equal__not_implemented():
 )
 def test__point__addition(point: Point, other: Number | Point, expected: Point):
     """
-    Test the ``Point.__add__()`` and ``Point.__radd__()`` methods.
+    Test that points can be added together and to numbers.
     """
     assert (point + other) == expected
-    assert point.__radd__(other) == expected
+    assert (other + point) == expected
 
 
 def test__point__addition__not_implemented():
     """
-    Test that ``Point.__add__()`` fails.
+    Test that points cannot be added to non-numerics.
     """
     with pytest.raises(TypeError):
         Point(1, 2) + "3"
@@ -66,7 +67,7 @@ def test__point__addition__not_implemented():
 )
 def test__point__addition_inplace(points: list[Number | Point], expected: Point):
     """
-    Test the ``Point.__iadd__()`` method.
+    Test that points can be added together and to numbers in place.
     """
     actual = Point(0, 0)
     for point in points:
@@ -81,19 +82,23 @@ def test__point__addition_inplace(points: list[Number | Point], expected: Point)
         (Point(4, 5), 3, Point(1, 2)),
         (Point(4.0, 5.0), 3.0, Point(1.0, 2.0)),
         (Point(4, 6), Point(3, 4), Point(1, 2)),
+        (3.0, Point(1.0, 2.0), Point(2.0, 1.0)),
     ],
 )
-def test__point__subtraction(point: Point, other: Number | Point, expected: Point):
+def test__point__subtraction(
+    point: Number | Point,
+    other: Number | Point,
+    expected: Point,
+):
     """
-    Test the ``Point.__sub__()`` and ``Point.__rsub__()`` method.
+    Test that points can be subtracted from each other and from numbers.
     """
     assert (point - other) == expected
-    assert point.__rsub__(other) == expected
 
 
 def test__point__subtraction__not_implemented():
     """
-    Test that ``Point.__sub__()`` fails.
+    Test that points cannot be subtracted from non-numerics.
     """
     with pytest.raises(TypeError):
         Point(1, 2) - "3"
@@ -108,13 +113,29 @@ def test__point__subtraction__not_implemented():
 )
 def test__point__subtraction_inplace(points: list[Number | Point], expected: Point):
     """
-    Test the ``Point.__isub__()`` method.
+    Test that points can be subtracted from each other and from numbers in
+    place.
     """
     actual = Point(0, 0)
     for point in points:
         actual -= point
 
     assert actual == expected
+
+
+@pytest.mark.parametrize(
+    "point, expected",
+    [
+        (Point(1, 2), Point(-1, -2)),
+        (Point(0, 0), Point(0, 0)),
+        (Point(-3, 4), Point(3, -4)),
+    ],
+)
+def test__point__negation(point: Point, expected: Point):
+    """
+    Test that points can be negated.
+    """
+    assert -point == expected
 
 
 @pytest.mark.parametrize(
@@ -127,7 +148,7 @@ def test__point__subtraction_inplace(points: list[Number | Point], expected: Poi
 )
 def test__point__multiplication(point: Point, other: Number | Point, expected: Point):
     """
-    Test the ``Point.__mul__()`` and ``Point.__rmul__()`` method.
+    Test that points can be multiplied by each other and by numbers.
     """
     assert (point * other) == expected
     assert point.__rmul__(other) == expected
@@ -135,7 +156,7 @@ def test__point__multiplication(point: Point, other: Number | Point, expected: P
 
 def test__point__multiplication__not_implemented():
     """
-    Test that ``Point.__mul__()`` fails.
+    Test that points cannot be multiplied by non-numerics.
     """
     with pytest.raises(TypeError):
         Point(1, 2) * "3"
@@ -150,7 +171,8 @@ def test__point__multiplication__not_implemented():
 )
 def test__point__multiplication_inplace(points: list[Number | Point], expected: Point):
     """
-    Test the ``Point.__imul__()`` method.
+    Test that points can be multiplied by each other and by numbers in
+    place.
     """
     actual = Point(1, 1)
     for point in points:
@@ -171,6 +193,6 @@ def test__point__multiplication_inplace(points: list[Number | Point], expected: 
 )
 def test__point__rotate(point: Point, angle: Number, expected: Point):
     """
-    Test the ``Point.rotate()`` method.
+    Test that points can be rotated.
     """
     assert point.rotate(angle) == expected

@@ -42,6 +42,14 @@ class Line:
     def __radd__(self, other: Number | Point) -> Line:
         return self.__add__(other)
 
+    def __sub__(self, other: Number | Point) -> Line:
+        if isinstance(other, Line):
+            raise TypeError("Cannot subtract two lines.")
+        elif isinstance(other, (Number, Point)):
+            return Line(self.start - other, self.end - other)
+        else:
+            return NotImplemented
+
     def rotate(self, angle: Number) -> Line:
         """
         Rotate the line anticlockwise by an angle about its starting
