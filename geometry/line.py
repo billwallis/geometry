@@ -4,6 +4,8 @@ Define a line between two points.
 
 from __future__ import annotations
 
+import math
+
 from geometry.point import Number, Point
 
 
@@ -95,3 +97,27 @@ class Line:
         Return the line as a vector.
         """
         return self.end - self.start
+
+    @property
+    def slope(self) -> Number:
+        """
+        Return the slope of the line.
+
+        If the line is vertical, return infinity.
+        """
+        if self.end.x == self.start.x:
+            return math.inf
+
+        return (self.end.y - self.start.y) / (self.end.x - self.start.x)
+
+    @property
+    def intercept(self) -> Number:
+        """
+        Return the y-intercept of the line.
+
+        If the line is vertical, return ``None``.
+        """
+        if self.slope == math.inf:
+            return None
+
+        return self.start.y - self.slope * self.start.x
