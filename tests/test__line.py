@@ -55,7 +55,7 @@ def test__line__string_representation():
 
     assert str(line) == "Line(Point(x=1, y=1), Point(x=3, y=4))"
     assert repr(line) == "Line(Point(x=1, y=1), Point(x=3, y=4))"
-    assert eval(repr(line)) == line
+    assert eval(repr(line)) == line  # noqa: S307
 
 
 @pytest.mark.parametrize(
