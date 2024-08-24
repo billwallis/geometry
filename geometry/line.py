@@ -28,27 +28,53 @@ class Line:
     def __eq__(self, other: Line) -> bool:
         if isinstance(other, Line):
             return self.start == other.start and self.end == other.end
-        else:
-            return NotImplemented
+
+        return NotImplemented
 
     def __add__(self, other: Number | Point) -> Line:
+        """
+        Add a line to a number or point.
+
+        Adding a number to a line will add the number to both the start and end
+        points. Adding a point to a line will add the point to both the start
+        and end points.
+
+        :param other: The number or point to add.
+
+        :return: A new line.
+
+        :raises TypeError: If adding two lines together.
+        """
         if isinstance(other, Line):
             raise TypeError("Cannot add two lines together.")
-        elif isinstance(other, (Number, Point)):
+        if isinstance(other, Number | Point):
             return Line(self.start + other, self.end + other)
-        else:
-            return NotImplemented
+
+        return NotImplemented
 
     def __radd__(self, other: Number | Point) -> Line:
         return self.__add__(other)
 
     def __sub__(self, other: Number | Point) -> Line:
+        """
+        Subtract a number or point from a line.
+
+        Subtracting a number from a line will subtract the number from both the
+        start and end points. Subtracting a point from a line will subtract the
+        point from both the start and end points.
+
+        :param other: The number or point to subtract.
+
+        :return: A new line.
+
+        :raises TypeError: If subtracting two lines.
+        """
         if isinstance(other, Line):
             raise TypeError("Cannot subtract two lines.")
-        elif isinstance(other, (Number, Point)):
+        if isinstance(other, Number | Point):
             return Line(self.start - other, self.end - other)
-        else:
-            return NotImplemented
+
+        return NotImplemented
 
     def rotate(self, angle: Number) -> Line:
         """
@@ -59,7 +85,10 @@ class Line:
 
         :return: A new rotated line.
         """
-        return Line(self.start, self.start + (self.end - self.start).rotate(angle))
+        return Line(
+            self.start,
+            self.start + (self.end - self.start).rotate(angle),
+        )
 
     def as_vector(self) -> Point:
         """

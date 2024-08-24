@@ -65,7 +65,10 @@ def test__point__addition__not_implemented():
         ([Point(1, 2), Point(3, 4)], Point(4, 6)),
     ],
 )
-def test__point__addition_inplace(points: list[Number | Point], expected: Point):
+def test__point__addition_inplace(
+    points: list[Number | Point],
+    expected: Point,
+):
     """
     Test that points can be added together and to numbers in place.
     """
@@ -111,7 +114,10 @@ def test__point__subtraction__not_implemented():
         ([Point(4, 6), Point(3, 4)], Point(-7, -10)),
     ],
 )
-def test__point__subtraction_inplace(points: list[Number | Point], expected: Point):
+def test__point__subtraction_inplace(
+    points: list[Number | Point],
+    expected: Point,
+):
     """
     Test that points can be subtracted from each other and from numbers in
     place.
@@ -146,7 +152,11 @@ def test__point__negation(point: Point, expected: Point):
         (Point(1, 2), Point(3, 4), Point(3, 8)),
     ],
 )
-def test__point__multiplication(point: Point, other: Number | Point, expected: Point):
+def test__point__multiplication(
+    point: Point,
+    other: Number | Point,
+    expected: Point,
+):
     """
     Test that points can be multiplied by each other and by numbers.
     """
@@ -169,7 +179,10 @@ def test__point__multiplication__not_implemented():
         ([Point(1, 2), Point(3, 4)], Point(3, 8)),
     ],
 )
-def test__point__multiplication_inplace(points: list[Number | Point], expected: Point):
+def test__point__multiplication_inplace(
+    points: list[Number | Point],
+    expected: Point,
+):
     """
     Test that points can be multiplied by each other and by numbers in
     place.
