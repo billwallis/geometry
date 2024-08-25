@@ -154,31 +154,6 @@ def test__line__subtraction__not_implemented():
 
 
 @pytest.mark.parametrize(
-    "line, angle, expected",
-    [
-        (Line(1, 2), math.radians(0), Line(1, 2)),
-        (Line(1, 2), math.radians(90), Line(1, Point(0, 2))),
-        (Line(1, 2), math.radians(180), Line(1, Point(0, 0))),
-        (Line(1, 2), math.radians(270), Line(1, Point(2, 0))),
-        (Line(1, 2), math.radians(360), Line(1, 2)),
-    ],
-)
-def test__line__rotate(line: Line, angle: Number, expected: Line):
-    """
-    Test that lines can be rotated.
-    """
-    assert line.rotate(angle) == expected
-
-
-def test__line__as_vector():
-    """
-    Test that a line can be represented as a vector.
-    """
-    line = Line(1, 2)
-    assert line.as_vector() == Point(1, 1)
-
-
-@pytest.mark.parametrize(
     "line, expected",
     [
         (Line(0, 0), 0),
@@ -224,3 +199,51 @@ def test__line__intercept(line: Line, expected: Number):
     Test that a line's intercept is calculated correctly.
     """
     assert line.intercept == expected
+
+
+@pytest.mark.parametrize(
+    "line, angle, expected",
+    [
+        (Line(1, 2), math.radians(0), Line(1, 2)),
+        (Line(1, 2), math.radians(90), Line(1, Point(0, 2))),
+        (Line(1, 2), math.radians(180), Line(1, Point(0, 0))),
+        (Line(1, 2), math.radians(270), Line(1, Point(2, 0))),
+        (Line(1, 2), math.radians(360), Line(1, 2)),
+    ],
+)
+def test__line__rotate(line: Line, angle: Number, expected: Line):
+    """
+    Test that lines can be rotated.
+    """
+    assert line.rotate(angle) == expected
+
+
+@pytest.mark.parametrize(
+    "line, point, expected",
+    [
+        (Line(0, 1), Point(0, 0), True),
+        (Line(0, 1), Point(1, 1), True),
+        (Line(0, 1), Point(0.5, 0.5), True),
+        (Line(0, 1), Point(0.25, 0.75), False),
+        (Line(0, 1), Point(2, 2), False),
+        (Line(0, 1), Point(-1, 0), False),
+        (Line(0, 1), Point(0, -1), False),
+        (Line(0, Point(0, 1)), Point(0, 1), True),
+        (Line(0, Point(0, 1)), Point(0, 2), False),
+        (Line(0, Point(1, 0)), Point(1, 0), True),
+        (Line(0, Point(1, 0)), Point(2, 0), False),
+    ],
+)
+def test__line__contains(line: Line, point: Point, expected: bool):
+    """
+    Test that a line determines whether it contains a point.
+    """
+    assert line.contains(point) == expected
+
+
+def test__line__as_vector():
+    """
+    Test that a line can be represented as a vector.
+    """
+    line = Line(1, 2)
+    assert line.as_vector() == Point(1, 1)

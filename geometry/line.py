@@ -78,26 +78,6 @@ class Line:
 
         return NotImplemented
 
-    def rotate(self, angle: Number) -> Line:
-        """
-        Rotate the line anticlockwise by an angle about its starting
-        point.
-
-        :param angle: The angle to rotate by, in radians.
-
-        :return: A new rotated line.
-        """
-        return Line(
-            self.start,
-            self.start + (self.end - self.start).rotate(angle),
-        )
-
-    def as_vector(self) -> Point:
-        """
-        Return the line as a vector.
-        """
-        return self.end - self.start
-
     @property
     def length(self) -> Number:
         """
@@ -130,3 +110,44 @@ class Line:
             return None
 
         return self.start.y - self.slope * self.start.x
+
+    def contains(self, point: Point) -> bool:
+        """
+        Return whether the line contains a point.
+
+        :param point: The point to check.
+
+        :return: Whether the line contains the point.
+        """
+        if self.slope == math.inf:
+            return (
+                self.start.x == point.x
+                and self.start.y <= point.y <= self.end.y
+            )
+
+        return (
+            self.start.x <= point.x <= self.end.x
+            and self.start.y <= point.y <= self.end.y
+            # whether y = mx + c holds
+            and math.isclose(point.y, self.slope * point.x + self.intercept)
+        )
+
+    def rotate(self, angle: Number) -> Line:
+        """
+        Rotate the line anticlockwise by an angle about its starting
+        point.
+
+        :param angle: The angle to rotate by, in radians.
+
+        :return: A new rotated line.
+        """
+        return Line(
+            self.start,
+            self.start + (self.end - self.start).rotate(angle),
+        )
+
+    def as_vector(self) -> Point:
+        """
+        Return the line as a vector.
+        """
+        return self.end - self.start
