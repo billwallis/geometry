@@ -176,3 +176,35 @@ def test__line__as_vector():
     """
     line = Line(1, 2)
     assert line.as_vector() == Point(1, 1)
+
+
+@pytest.mark.parametrize(
+    "line, expected",
+    [
+        (Line(0, 0), math.inf),
+        (Line(1, 2), 1),
+        (Line(0, Point(1, 0)), 0),
+        (Line(Point(0, 1), 0), math.inf),
+    ],
+)
+def test__line__slope(line: Line, expected: Number):
+    """
+    Test that a line's slope is calculated correctly.
+    """
+    assert line.slope == expected
+
+
+@pytest.mark.parametrize(
+    "line, expected",
+    [
+        (Line(0, 0), None),
+        (Line(1, 2), 0),
+        (Line(0, Point(1, 0)), 0),
+        (Line(Point(0, 1), 0), None),
+    ],
+)
+def test__line__intercept(line: Line, expected: Number):
+    """
+    Test that a line's intercept is calculated correctly.
+    """
+    assert line.intercept == expected
