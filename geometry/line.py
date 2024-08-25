@@ -99,6 +99,15 @@ class Line:
         return self.end - self.start
 
     @property
+    def length(self) -> Number:
+        """
+        Return the length of the line.
+        """
+        return math.sqrt(
+            (self.end.x - self.start.x) ** 2 + (self.end.y - self.start.y) ** 2
+        )
+
+    @property
     def slope(self) -> Number:
         """
         Return the slope of the line.

@@ -181,6 +181,22 @@ def test__line__as_vector():
 @pytest.mark.parametrize(
     "line, expected",
     [
+        (Line(0, 0), 0),
+        (Line(0, Point(1, 0)), 1),
+        (Line(Point(0, 1), 0), 1),
+        (Line(1, 2), math.sqrt(2)),
+    ],
+)
+def test__line__length(line: Line, expected: Number):
+    """
+    Test that a line's length is calculated correctly.
+    """
+    assert math.isclose(line.length, expected)
+
+
+@pytest.mark.parametrize(
+    "line, expected",
+    [
         (Line(0, 0), math.inf),
         (Line(1, 2), 1),
         (Line(0, Point(1, 0)), 0),
