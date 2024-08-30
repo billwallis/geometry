@@ -95,15 +95,29 @@ class Point(NamedTuple):
     def __imul__(self, other: Number | Point) -> Point:
         return self.__mul__(other)
 
-    def rotate(self, angle: Number) -> Point:
+    def rotate(self, *, by: Number, around: Point) -> Point:
         """
-        Rotate the point anticlockwise around (0, 0) by an angle.
+        Rotate the point anticlockwise around a point, ``around``, by an angle,
+        ``by``.
 
-        :param angle: The angle to rotate by, in radians.
+        :param by: The angle to rotate by, in radians.
+        :param around: The point to rotate around.
 
         :return: A new rotated point.
         """
-        return Point(
-            round(self.x * math.cos(angle) - self.y * math.sin(angle), 8),
-            round(self.x * math.sin(angle) + self.y * math.cos(angle), 8),
-        )
+        return _rotate_around_origin(self - around, by) + around
+
+
+def _rotate_around_origin(point: Point, by: Number) -> Point:
+    """
+    Rotate a point anticlockwise around the origin by an angle.
+
+    :param point: The point to rotate.
+    :param by: The angle to rotate by, in radians.
+
+    :return: A new rotated point.
+    """
+    return Point(
+        round(point.x * math.cos(by) - point.y * math.sin(by), 8),
+        round(point.x * math.sin(by) + point.y * math.cos(by), 8),
+    )

@@ -143,7 +143,8 @@ class Line:
         """
         return Line(
             self.start,
-            self.start + (self.end - self.start).rotate(angle),
+            self.start
+            + (self.end - self.start).rotate(by=angle, around=Point(0, 0)),
         )
 
     def as_vector(self) -> Point:

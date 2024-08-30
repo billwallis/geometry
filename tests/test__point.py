@@ -162,8 +162,8 @@ def test__point_can_be_multiplied_to_points_and_numbers(
     """
     Test that points can be multiplied by each other and by numbers.
     """
-    assert (point * other) == expected
-    assert point.__rmul__(other) == expected
+    assert point * other == expected
+    assert other * point == expected
 
 
 def test__point_multiplication_is_not_implemented_for_non_numerics():
@@ -197,21 +197,31 @@ def test__point_can_be_multiplied_inplace(
 
 
 @pytest.mark.parametrize(
-    "point, angle, expected",
+    "point_to_rotate, point_of_rotation, angle, expected",
     [
-        (Point(1, 2), math.radians(0), Point(1, 2)),
-        (Point(1, 2), math.radians(90), Point(-2, 1)),
-        (Point(1, 2), math.radians(180), Point(-1, -2)),
-        (Point(1, 2), math.radians(270), Point(2, -1)),
-        (Point(1, 2), math.radians(360), Point(1, 2)),
+        # Rotate a point around the origin
+        (Point(1, 2), Point(0, 0), math.radians(0), Point(1, 2)),
+        (Point(1, 2), Point(0, 0), math.radians(90), Point(-2, 1)),
+        (Point(1, 2), Point(0, 0), math.radians(180), Point(-1, -2)),
+        (Point(1, 2), Point(0, 0), math.radians(270), Point(2, -1)),
+        (Point(1, 2), Point(0, 0), math.radians(360), Point(1, 2)),
+        # Rotate a point around the origin
+        (Point(1, 2), Point(1, 1), math.radians(0), Point(1, 2)),
+        (Point(1, 2), Point(1, 1), math.radians(90), Point(0, 1)),
+        (Point(1, 2), Point(1, 1), math.radians(180), Point(1, 0)),
+        (Point(1, 2), Point(1, 1), math.radians(270), Point(2, 1)),
+        (Point(1, 2), Point(1, 1), math.radians(360), Point(1, 2)),
     ],
 )
-def test__point_can_be_rotated_around_the_origin(
-    point: Point,
+def test__point_can_be_rotated(
+    point_to_rotate: Point,
+    point_of_rotation: Point,
     angle: Number,
     expected: Point,
 ):
     """
     Test that points can be rotated.
     """
-    assert point.rotate(angle) == expected
+    assert (
+        point_to_rotate.rotate(by=angle, around=point_of_rotation) == expected
+    )
