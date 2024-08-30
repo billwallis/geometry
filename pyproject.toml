@@ -5,7 +5,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "geometry"
-version = "0.0.4"
+version = "0.0.5"
 description = "Simple geometry library for Python."
 readme = "README.md"
 authors = ["Bilbottom"]

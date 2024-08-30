@@ -205,7 +205,7 @@ def test__point_can_be_multiplied_inplace(
         (Point(1, 2), Point(0, 0), math.radians(180), Point(-1, -2)),
         (Point(1, 2), Point(0, 0), math.radians(270), Point(2, -1)),
         (Point(1, 2), Point(0, 0), math.radians(360), Point(1, 2)),
-        # Rotate a point around the origin
+        # Rotate a point around another point
         (Point(1, 2), Point(1, 1), math.radians(0), Point(1, 2)),
         (Point(1, 2), Point(1, 1), math.radians(90), Point(0, 1)),
         (Point(1, 2), Point(1, 1), math.radians(180), Point(1, 0)),
