@@ -17,21 +17,19 @@ from geometry.point import Number, Point
         (Point(1, 2), Point(1, 2), True),
         (Point(1, 2), Point(1.0, 2.0), True),
         (Point(1, 2), Point(1, 3), False),
+        (Point(1, 2), 3, False),
+        (Point(1, 2), "3", False),
     ],
 )
-def test__point__equal(point: Point, other: Point, expected: Point):
+def test__point_can_be_compared_for_equality(
+    point: Point,
+    other: Point,
+    expected: Point,
+):
     """
     Test that points can be compared for equality.
     """
     assert (point == other) is expected
-
-
-def test__point__not_equal():
-    """
-    Test that points are not equal to other types.
-    """
-    assert (Point(1, 2) == 3) is False
-    assert (Point(1, 2) == "3") is False
 
 
 @pytest.mark.parametrize(
@@ -42,7 +40,11 @@ def test__point__not_equal():
         (Point(1, 2), Point(3, 4), Point(4, 6)),
     ],
 )
-def test__point__addition(point: Point, other: Number | Point, expected: Point):
+def test__point_can_be_added_to_points_and_numbers(
+    point: Point,
+    other: Number | Point,
+    expected: Point,
+):
     """
     Test that points can be added together and to numbers.
     """
@@ -50,7 +52,7 @@ def test__point__addition(point: Point, other: Number | Point, expected: Point):
     assert (other + point) == expected
 
 
-def test__point__addition__not_implemented():
+def test__point_addition_is_not_implemented_with_non_numbers():
     """
     Test that points cannot be added to non-numerics.
     """
@@ -65,7 +67,7 @@ def test__point__addition__not_implemented():
         ([Point(1, 2), Point(3, 4)], Point(4, 6)),
     ],
 )
-def test__point__addition_inplace(
+def test__point_can_be_added_inplace(
     points: list[Number | Point],
     expected: Point,
 ):
@@ -88,7 +90,7 @@ def test__point__addition_inplace(
         (3.0, Point(1.0, 2.0), Point(2.0, 1.0)),
     ],
 )
-def test__point__subtraction(
+def test__point_can_subtract_points_and_numbers(
     point: Number | Point,
     other: Number | Point,
     expected: Point,
@@ -99,7 +101,7 @@ def test__point__subtraction(
     assert (point - other) == expected
 
 
-def test__point__subtraction__not_implemented():
+def test__point_subtraction_is_not_implemented_with_non_numerics():
     """
     Test that points cannot be subtracted from non-numerics.
     """
@@ -114,7 +116,7 @@ def test__point__subtraction__not_implemented():
         ([Point(4, 6), Point(3, 4)], Point(-7, -10)),
     ],
 )
-def test__point__subtraction_inplace(
+def test__point_can_subtract_inplace(
     points: list[Number | Point],
     expected: Point,
 ):
@@ -137,7 +139,7 @@ def test__point__subtraction_inplace(
         (Point(-3, 4), Point(3, -4)),
     ],
 )
-def test__point__negation(point: Point, expected: Point):
+def test__point_has_negation(point: Point, expected: Point):
     """
     Test that points can be negated.
     """
@@ -152,7 +154,7 @@ def test__point__negation(point: Point, expected: Point):
         (Point(1, 2), Point(3, 4), Point(3, 8)),
     ],
 )
-def test__point__multiplication(
+def test__point_can_be_multiplied_to_points_and_numbers(
     point: Point,
     other: Number | Point,
     expected: Point,
@@ -164,7 +166,7 @@ def test__point__multiplication(
     assert point.__rmul__(other) == expected
 
 
-def test__point__multiplication__not_implemented():
+def test__point_multiplication_is_not_implemented_for_non_numerics():
     """
     Test that points cannot be multiplied by non-numerics.
     """
@@ -179,7 +181,7 @@ def test__point__multiplication__not_implemented():
         ([Point(1, 2), Point(3, 4)], Point(3, 8)),
     ],
 )
-def test__point__multiplication_inplace(
+def test__point_can_be_multiplied_inplace(
     points: list[Number | Point],
     expected: Point,
 ):
@@ -204,7 +206,11 @@ def test__point__multiplication_inplace(
         (Point(1, 2), math.radians(360), Point(1, 2)),
     ],
 )
-def test__point__rotate(point: Point, angle: Number, expected: Point):
+def test__point_can_be_rotated_around_the_origin(
+    point: Point,
+    angle: Number,
+    expected: Point,
+):
     """
     Test that points can be rotated.
     """
