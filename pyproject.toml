@@ -15,8 +15,8 @@ repository = "https://github.com/Bilbottom/geometry"
 python = "^3.11"
 
 [tool.poetry.group]
-dev.optional = false
-test.optional = false
+dev.optional = true
+test.optional = true
 
 [tool.poetry.group.dev.dependencies]
 coverage-badge = "^1.1.0"
