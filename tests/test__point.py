@@ -27,7 +27,7 @@ def test__point_can_be_compared_for_equality(
     expected: Point,
 ):
     """
-    Test that points can be compared for equality.
+    Points can be compared for equality.
     """
     assert (point == other) is expected
 
@@ -46,7 +46,7 @@ def test__point_can_be_added_to_points_and_numbers(
     expected: Point,
 ):
     """
-    Test that points can be added together and to numbers.
+    Points can be added together and to numbers.
     """
     assert (point + other) == expected
     assert (other + point) == expected
@@ -54,7 +54,7 @@ def test__point_can_be_added_to_points_and_numbers(
 
 def test__point_addition_is_not_implemented_with_non_numbers():
     """
-    Test that points cannot be added to non-numerics.
+    Points cannot be added to non-numerics.
     """
     with pytest.raises(TypeError):
         Point(1, 2) + "3"
@@ -72,7 +72,7 @@ def test__point_can_be_added_inplace(
     expected: Point,
 ):
     """
-    Test that points can be added together and to numbers in place.
+    Points can be added together and to numbers in place.
     """
     actual = Point(0, 0)
     for point in points:
@@ -96,14 +96,14 @@ def test__point_can_subtract_points_and_numbers(
     expected: Point,
 ):
     """
-    Test that points can be subtracted from each other and from numbers.
+    Points can be subtracted from each other and from numbers.
     """
     assert (point - other) == expected
 
 
 def test__point_subtraction_is_not_implemented_with_non_numerics():
     """
-    Test that points cannot be subtracted from non-numerics.
+    Points cannot be subtracted from non-numerics.
     """
     with pytest.raises(TypeError):
         Point(1, 2) - "3"
@@ -121,8 +121,7 @@ def test__point_can_subtract_inplace(
     expected: Point,
 ):
     """
-    Test that points can be subtracted from each other and from numbers in
-    place.
+    Points can be subtracted from each other and from numbers in place.
     """
     actual = Point(0, 0)
     for point in points:
@@ -141,7 +140,7 @@ def test__point_can_subtract_inplace(
 )
 def test__point_has_negation(point: Point, expected: Point):
     """
-    Test that points can be negated.
+    Points can be negated.
     """
     assert -point == expected
 
@@ -160,7 +159,7 @@ def test__point_can_be_multiplied_to_points_and_numbers(
     expected: Point,
 ):
     """
-    Test that points can be multiplied by each other and by numbers.
+    Points can be multiplied by each other and by numbers.
     """
     assert point * other == expected
     assert other * point == expected
@@ -168,7 +167,7 @@ def test__point_can_be_multiplied_to_points_and_numbers(
 
 def test__point_multiplication_is_not_implemented_for_non_numerics():
     """
-    Test that points cannot be multiplied by non-numerics.
+    Points cannot be multiplied by non-numerics.
     """
     with pytest.raises(TypeError):
         Point(1, 2) * "3"
@@ -186,8 +185,7 @@ def test__point_can_be_multiplied_inplace(
     expected: Point,
 ):
     """
-    Test that points can be multiplied by each other and by numbers in
-    place.
+    Points can be multiplied by each other and by numbers in place.
     """
     actual = Point(1, 1)
     for point in points:
@@ -220,7 +218,7 @@ def test__point_can_be_rotated(
     expected: Point,
 ):
     """
-    Test that points can be rotated.
+    Points can be rotated.
     """
     assert (
         point_to_rotate.rotate(by=angle, around=point_of_rotation) == expected

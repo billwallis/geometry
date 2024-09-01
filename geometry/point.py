@@ -1,5 +1,5 @@
 """
-Define a point in n-dimensional space.
+A point is a coordinate in 2-dimensional space.
 """
 
 from __future__ import annotations

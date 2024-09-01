@@ -1,5 +1,5 @@
 """
-Simple geometry library for Python.
+Two-dimensional geometry library.
 """
 
 from geometry.line import Line

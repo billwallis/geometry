@@ -1,5 +1,5 @@
 """
-Define a line between two points.
+A line is the space between two points.
 """
 
 from __future__ import annotations
@@ -11,7 +11,7 @@ from geometry.point import Number, Point
 
 class Line:
     """
-    A line between two points.
+    The space between two points.
     """
 
     start: Number | Point

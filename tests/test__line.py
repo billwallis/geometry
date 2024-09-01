@@ -28,8 +28,7 @@ def test__line_can_be_initialised(
     expected: Line,
 ):
     """
-    Test that a line can be initialised with numbers, points, and a mix of
-    both.
+    A line can be initialised with numbers, points, and a mix of both.
     """
     line = Line(start, end)
 
@@ -39,7 +38,7 @@ def test__line_can_be_initialised(
 
 def test__line_is_represented_correctly():
     """
-    Test the string and representation of a line.
+    The string and representation of a line are correct.
     """
     line = Line(1, Point(3, 4))
 
@@ -64,8 +63,8 @@ def test__line_can_be_compared_for_equality(
     expected: bool,
 ):
     """
-    Test that lines can be compared for equality, and that comparisons with
-    non-lines return ``False``.
+    Lines can be compared for equality and comparisons with non-lines return
+    ``False``.
     """
     assert (line == other) is expected
 
@@ -83,7 +82,7 @@ def test__line_can_be_added_to_points_and_numbers(
     expected: Line,
 ):
     """
-    Test that lines can be added to points and numbers.
+    Lines can be added to points and numbers.
     """
     assert (line + other) == expected
     assert (other + line) == expected
@@ -101,7 +100,7 @@ def test__line_addition_is_not_implemented_with_non_numbers(
     other: str | Line,
 ):
     """
-    Test that lines cannot be added to non-numerics.
+    Lines cannot be added to non-numerics.
     """
     with pytest.raises(TypeError):
         line + other
@@ -119,7 +118,7 @@ def test__line_can_be_added_inplace(
     expected: Line,
 ):
     """
-    Test that lines can be added together and to points/numbers in place.
+    Lines can be added together and to points/numbers in place.
     """
     actual = Line(0, 0)
     for point in points:
@@ -141,14 +140,14 @@ def test__line_can_subtract_points_and_numbers(
     expected: Line,
 ):
     """
-    Test that points and numbers can be subtracted from lines.
+    Points and numbers can be subtracted from lines.
     """
     assert (line - other) == expected
 
 
 def test__line_subtraction_is_not_implemented_with_non_numerics():
     """
-    Test that lines and non-numerics cannot be subtracted from lines.
+    Lines and non-numerics cannot be subtracted from lines.
     """
     with pytest.raises(TypeError):
         Line(1, 2) - Line(1, 2)
@@ -168,7 +167,7 @@ def test__line_subtraction_is_not_implemented_with_non_numerics():
 )
 def test__line_has_length(line: Line, expected: Number):
     """
-    Test that a line's length is calculated correctly.
+    A line's length is calculated correctly.
     """
     assert math.isclose(line.length, expected)
 
@@ -184,7 +183,7 @@ def test__line_has_length(line: Line, expected: Number):
 )
 def test__line_has_slope(line: Line, expected: Number):
     """
-    Test that a line's slope is calculated correctly.
+    A line's slope is calculated correctly.
     """
     assert line.slope == expected
 
@@ -200,7 +199,7 @@ def test__line_has_slope(line: Line, expected: Number):
 )
 def test__line_has_intercept(line: Line, expected: Number):
     """
-    Test that a line's intercept is calculated correctly.
+    A line's intercept is calculated correctly.
     """
     assert line.intercept == expected
 
@@ -217,7 +216,7 @@ def test__line_has_intercept(line: Line, expected: Number):
 )
 def test__line_can_be_rotated(line: Line, angle: Number, expected: Line):
     """
-    Test that lines can be rotated.
+    Lines can be rotated.
     """
     assert line.rotate(angle) == expected
 
@@ -240,14 +239,14 @@ def test__line_can_be_rotated(line: Line, angle: Number, expected: Line):
 )
 def test__line_contains_points(line: Line, point: Point, expected: bool):
     """
-    Test that a line determines whether it contains a point.
+    A line can determine whether it contains a point.
     """
     assert line.contains(point) == expected
 
 
 def test__line_can_be_turned_into_a_vector():
     """
-    Test that a line can be represented as a vector.
+    A line can be represented as a vector.
     """
     line = Line(1, 2)
     assert line.as_vector() == Point(1, 1)
