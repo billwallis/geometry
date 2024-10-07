@@ -9,7 +9,7 @@ repos:
       - id: identity
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v5.0.0
     hooks:
       - id: no-commit-to-branch
         name: Don't allow commits to the main branch
@@ -47,7 +47,7 @@ repos:
         name: Make code pretty
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.6.2
+    rev: v0.6.9
     hooks:
       - id: ruff
         name: Lint Python code
@@ -57,7 +57,7 @@ repos:
 
   # Sourcery
   - repo: https://github.com/sourcery-ai/sourcery
-    rev: v1.18.1b30
+    rev: v1.23.0
     hooks:
       - id: sourcery
         name: Check for refactoring opportunities
