@@ -7,7 +7,7 @@ name = "geometry"
 version = "0.0.6"
 description = "Simple geometry library for Python."
 readme = "README.md"
-authors = [{name = "Bilbottom"}]
+authors = [{name = "billwallis"}]
 requires-python = ">=3.11"
 dependencies = []
 
