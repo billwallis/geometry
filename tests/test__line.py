@@ -45,6 +45,15 @@ def test__line_is_represented_correctly():
     assert str(line) == "Line(Point(x=1, y=1), Point(x=3, y=4))"
     assert repr(line) == "Line(Point(x=1, y=1), Point(x=3, y=4))"
     assert eval(repr(line)) == line  # noqa: S307
+    assert hash(line) == hash((line.start, line.end))
+
+
+def test__line_can_be_used_as_a_key_in_a_dict():
+    """
+    Lines can be used as keys in a dictionary.
+    """
+
+    assert {Line(1, 2): "value"}[Line(1, 2)] == "value"
 
 
 @pytest.mark.parametrize(

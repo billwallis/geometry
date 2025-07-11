@@ -21,6 +21,9 @@ class Line:
         self.start = start if isinstance(start, Point) else Point(start, start)
         self.end = end if isinstance(end, Point) else Point(end, end)
 
+    def __hash__(self):
+        return hash((self.start, self.end))
+
     def __str__(self):
         return f"Line({self.start}, {self.end})"
 

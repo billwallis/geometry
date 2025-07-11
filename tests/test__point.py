@@ -11,6 +11,14 @@ import pytest
 from geometry.point import Number, Point
 
 
+def test__point_can_be_used_as_a_key_in_a_dict():
+    """
+    Points can be used as keys in a dictionary.
+    """
+
+    assert {Point(1, 2): "value"}[Point(1, 2)] == "value"
+
+
 @pytest.mark.parametrize(
     "point, other, expected",
     [
