@@ -18,6 +18,9 @@ class Point(NamedTuple):
     x: Number
     y: Number
 
+    def __hash__(self) -> int:
+        return hash((self.x, self.y))
+
     def __eq__(self, other: Point) -> bool:
         if isinstance(other, Point):
             return self.x == other.x and self.y == other.y
