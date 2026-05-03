@@ -17,17 +17,17 @@ class Line:
     start: Number | Point
     end: Number | Point
 
-    def __init__(self, start: Number | Point, end: Number | Point):
+    def __init__(self, start: Number | Point, end: Number | Point) -> None:
         self.start = start if isinstance(start, Point) else Point(start, start)
         self.end = end if isinstance(end, Point) else Point(end, end)
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         return hash((self.start, self.end))
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"Line({self.start}, {self.end})"
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return self.__str__()
 
     def __eq__(self, other: Line) -> bool:
